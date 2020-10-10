@@ -1,1 +1,1 @@
-# Python-Labs
+Лабораторні з Python
