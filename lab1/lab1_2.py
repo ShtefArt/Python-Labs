@@ -1,4 +1,4 @@
-
+import re
 
 string = input("Enter string: ")
 i = 0
@@ -10,41 +10,30 @@ tem_j = 0
 tem_i = 0
 count = 0
 temp_count = 0
-while i <= len(string):
-
-    if i == len(string):
-        if i - j != l:
-            if temp_count < count:
-                temp_count = count
-                res_j = tem_j
-                res_i = tem_i
-            break
-        elif i - j == l:
+str_arr = re.split("[., :;?!]", string)
+for str in str_arr:
+    if str == '':
+        j += 1
+for j in range(0, j):
+    str_arr.remove('')
+for str in str_arr:
+    if str != '':
+        if len(str) == l:
             count += 1
             if temp_count < count:
                 temp_count = count
                 res_i = i
                 res_j = tem_j
-            break
-    if string[i] == "," or string[i] == ' ' or string[i] == '.' or string[i] == ';' or string[i] == ':' or string[i] == '?' or string[i] == '!':
-        count += 1
-
-        if i - j != l:
-            if temp_count < count - 1:
-                temp_count = count - 1
+        elif len(str) != l:
+            if temp_count < count:
+                temp_count = count
                 res_j = tem_j
-                res_i = j - 1
-            l = i - j
+                res_i = tem_i
+            l = len(str)
             count = 1
-            tem_j = j
-
+            tem_j = i
         tem_i = i
-        while i < len(string) and (string[i] == "," or string[i] == ' ' or string[i] == '.' or string[i] == ';' or string[i] == ':' or string[i] == '?' or string[i] == '!'):
-            i += 1
-        j = i
     i += 1
-if temp_count < count:
-    res_i = i - 1
-    res_j = tem_j
-print(string[res_j: res_i])
+print(', '.join(str_arr[res_j:res_i + 1]))
+
 
