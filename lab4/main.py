@@ -16,12 +16,18 @@ def get_avg_salary(company_name):
 def get_cheapest_proj(company_name):
     devs = companies.get(company_name)
     min = float("inf")
+    projects = {}
     for i in devs:
-        a = i.get_salary()
-        if a < min:
-            min = a
-            proj = i.project
-    return proj
+        if projects.get(i.project) is None:
+            projects[i.project] = i.get_salary()
+        else:
+            projects[i.project] += i.get_salary()
+    for j in projects:
+        if projects.get(j) < min:
+            min = projects.get(j)
+    for key, value in projects.items():
+        if value == min:
+            return key
 
 
 companies = {}
@@ -65,7 +71,5 @@ print('Enter company you`r interested in: ')
 comp = input()
 print(get_avg_salary(comp))
 print('Cheapest project: ', get_cheapest_proj(comp))
-p = companies.get('comp')
-pe = p.pop()
-print(pe.first_name, pe.last_name, pe.get_age())
+
 
